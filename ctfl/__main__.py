@@ -107,7 +107,7 @@ def print_data(data):
         table.add_row(data[0][i], data[1][i], data[2][i])
 
     console = Console()
-    console.print(table)
+    console.print(table, style="link https://ctftime.org/event/list/upcoming")
 
 
 if __name__ == "__main__":
