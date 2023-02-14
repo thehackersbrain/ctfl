@@ -10,7 +10,13 @@ from sys import exit
 from rich import print
 
 
-def main(url, headers):
+def main():
+    url = 'https://ctftime.org/event/list/upcoming'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5\
+        37.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+    }
+
     parser = parseArgs()
     args = parser.parse_args()
 
@@ -95,9 +101,4 @@ def print_data(data):
 
 
 if __name__ == "__main__":
-    url = 'https://ctftime.org/event/list/upcoming'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5\
-        37.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-    }
-    main(url, headers)
+    main()
