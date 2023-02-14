@@ -8,6 +8,7 @@ from datetime import datetime
 import argparse
 from sys import exit
 from rich import print
+from ctfl import __version__
 
 
 def main():
@@ -26,6 +27,9 @@ def main():
         month = months[int(datetime.now().strftime("%m")) + 1]
     elif (args.all):
         month = None
+    elif (args.version):
+        print("[bold]ctfl {}[/]", __version__)
+        exit(0)
     else:
         month = datetime.now().strftime("%b")
     try:
@@ -38,7 +42,7 @@ def main():
 
 
 def parseArgs():
-    parser = argparse.ArgumentParser(description="CTFTime Upcoming CTF Viewer")
+    parser = argparse.ArgumentParser(description="CTFTime Upcoming CTF Events Lists")
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
             "-n",
@@ -51,6 +55,12 @@ def parseArgs():
             "--all",
             action="store_true",
             help="List all available CTFs on the event list"
+    )
+    group.add_argument(
+            "-v",
+            "--version",
+            action="store_true",
+            help="Prints the version of the tool"
     )
     return parser
 
