@@ -28,7 +28,7 @@ def main():
     elif (args.all):
         month = None
     elif (args.version):
-        print("[bold]ctfl {}[/]", __version__)
+        print("[bold]ctfl {}[/]".format(__version__))
         exit(0)
     else:
         month = datetime.now().strftime("%b")
