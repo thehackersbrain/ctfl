@@ -76,6 +76,8 @@ def extract_data(url, headers, month):
     styles = []
     locations = []
     weights = []
+    links = []
+    base_link = "https://ctftime.org"
 
     if (month is not None):
         for i in events_table.find_all('tr')[1::]:
@@ -84,6 +86,7 @@ def extract_data(url, headers, month):
             if (month in date):
                 dates.append(date)
                 names.append(columns[0].a.text.strip())
+                links.append(base_link + columns[0].a.get('href').strip())
                 styles.append(columns[2].text.strip())
                 locations.append(columns[3].text.strip())
                 weights.append(columns[4].text.strip())
@@ -93,12 +96,13 @@ def extract_data(url, headers, month):
         for i in events_table.find_all('tr')[1:]:
             columns = i.find_all('td')
             names.append(columns[0].a.text.strip())
+            links.append(base_link + columns[0].a.get('href').strip())
             dates.append(columns[1].text.strip())
             styles.append(columns[2].text.strip())
             locations.append(columns[3].text.strip())
             weights.append(columns[4].text.strip())
 
-    data = [names, dates, styles, locations, weights]
+    data = [names, dates, styles, locations, weights, links]
     return data
 
 
@@ -112,10 +116,10 @@ def print_data(data):
     table.add_column("Weight", justify="right", style="cyan")
 
     for i in range(len(data[0])):
-        table.add_row(data[0][i], data[1][i], data[2][i], data[3][i], data[4][i])
+        table.add_row(data[0][i], data[1][i], data[2][i], data[3][i], data[4][i], style="link " + data[5][i])
 
     console = Console()
-    console.print(table, style="link https://ctftime.org/event/list/upcoming")
+    console.print(table)
 
 
 if __name__ == "__main__":
